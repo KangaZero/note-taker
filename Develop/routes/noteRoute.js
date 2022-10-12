@@ -9,7 +9,7 @@ const note = express.Router();
 note.get('/', (req, res) =>{
     console.info(`${req.method} request for note`);
     readFromFile('../db/db.json').then((data) => res.json(JSON.parse(data)));
-})
+});
 
 
 note.post('/', (req, res) => {
@@ -36,7 +36,7 @@ note.post('/', (req, res) => {
     } else {
         res.status(400).send("Error!")
     }
-})
+});
 
 note.delete('/:id', (req, res) => {
     const id = req.params.id;
@@ -51,22 +51,12 @@ note.delete('/:id', (req, res) => {
                 //currentData.filter(() => currentData[i].id != id)
                 if (currentData[i].id == id) {
                     currentData.splice(currentData[i].id)
-                    fs.writeFile('../db/db.json', currentData)
+                   writeTofile('../db/db.json', currentData);
                 }  
             }      
         }
-    })
-})
+    });
+});
 
 module.exports = note; 
 
-
-//   (fs.readFile('../db/db.json', (err, data) => {
-//     if (err) {
-//         throw err;
-//     } else {
-    
-//         console.log((JSON.parse(data)).filter(()=> "text" ? console.log(JSON.parse(data)) : console.error("nope")
-//         ))
-//     }
-// }));
