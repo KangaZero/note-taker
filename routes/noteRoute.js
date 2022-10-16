@@ -2,7 +2,7 @@ const express = require('express');
 const fs = require('fs');
 const path = require('path');
 //helpers
-const { readFromFile, writeTofile, readAndAppend } = require('../helpers/fsUtils');
+const { readFromFile, writeToFile, readAndAppend } = require('../helpers/fsUtils');
 const uuid = require('../helpers/uuid');
 const apiData = require('../db/db.json')
 //Router name
@@ -26,13 +26,14 @@ note.get('/id/:id', (req, res) => {
     
     console.info(`${req.method} request for id: ${id}`);
 
-    const findId = apiData.filter( (elem) => elem.id == id)
-    res.json(findId)
-    // readFromFile(path.join(__dirname, '../db/db.json'))
-    //     .then((data) => {
-            // const parsedData = JSON.parse(data)
-            // console.log(parsedData.length)
-            // res.json(parsedData)
+    // https://stackoverflow.com/questions/2722159/how-to-filter-object-array-based-on-attributes
+    const findId = apiData.filter((elem) => elem.id == id)
+    console.log(findId)
+    if(findId){
+        return res.json(findId)
+    } else {
+        return res.status(400).send("Id not found!")
+    }
 
             // for (let i = 0; i < apiData.length; i++) {
             //     console.log(apiData.length, req.params.id, apiData[i].id)
@@ -75,26 +76,17 @@ note.post('/', (req, res) => {
     }
 });
 
-note.delete('/:id', (req, res) => {
+note.delete('/id/:id', (req, res) => {
+    const id = req.params.id;
+    console.info(`${req.method} request for note for id: ${id}`);
+    const removeId = apiData.filter((elem) => elem.id !== id)
+    console.log(removeId)
+
+    writeToFile((path.join(__dirname, '../db/db.json')), removeId)
     
-    readFromFile(path.join(__dirname, '../db/db.json'), (err, data) => {
-        if (err) {
-            throw err;
-        } else {
-            const id = req.params.id;
-            const currentData = JSON.parse(data)
-            const newData = []
-
-            let removeCurrentData = currentData.map(() =>{
-                if (currentData.id != id){
-                    newData.push[currentData]
-                }
-            }) 
-            removeCurrentData();
-
-            writeTofile(newData, (path.join(__dirname, '../db/db.json')));
-        }
-    });
 });
+
+
+
 
 module.exports = note; 
