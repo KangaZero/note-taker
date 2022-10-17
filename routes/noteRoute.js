@@ -34,21 +34,8 @@ note.get('/id/:id', (req, res) => {
     } else {
         return res.status(400).send("Id not found!")
     }
-
-            // for (let i = 0; i < apiData.length; i++) {
-            //     console.log(apiData.length, req.params.id, apiData[i].id)
-            //         // console.log(apiData[])
-            //     if (req.params.id === apiData[i].id){
-            //       return res.json(apiData[i]);
-            //     } 
-            //     else {
-            //         return res.status(400).send("id not found!")
-            //     }
-                
-            // };
-
     });
-// });
+
 
 note.post('/', (req, res) => {
     //TODO: create middleware for console.info
@@ -80,7 +67,7 @@ note.delete('/id/:id', (req, res) => {
     const id = req.params.id;
     console.info(`${req.method} request for note for id: ${id}`);
     const removeId = apiData.filter((elem) => elem.id !== id)
-    console.log(removeId)
+    // console.log(removeId)
 
     writeToFile((path.join(__dirname, '../db/db.json')), removeId)
     

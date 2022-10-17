@@ -1,17 +1,26 @@
 {
   "name": "note-taker",
   "version": "1.0.0",
-  "description": "",
+  "description": "An application to take notes",
   "main": "server.js",
   "scripts": {
     "devStart": "nodemon server.js"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Samuel Wai Weng Yong",
+  "license": "MIT",
   "dependencies": {
     "express": "^4.18.2"
   },
   "devDependencies": {
     "nodemon": "^2.0.20"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KangaZero/note-taker.git"
+  },
+  "keywords": [
+    "node",
+    "heroku",
+    "express"
+  ]
 }

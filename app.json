@@ -1,0 +1,7 @@
+{
+    "name": "Note Taker",
+    "description": "An app to take and save notes",
+    "repository": "https://github.com/KangaZero/note-taker.git",
+    "keywords": ["node", "express", "heroku"]
+  }
+  
